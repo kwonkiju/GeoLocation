@@ -21,12 +21,32 @@
     
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc687eb6e7836133082e4ee067adcd4f"></script>
         <script>
-            var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
-            var mapOption = { 
-                 center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        var map;
+
+        if(navigator.geolocation){
+            span.innerHTML='Geolocation API를 지원하는 브라우저';
+
+            var options ={timeout :3000,maxinumAge:5000};
+
+            navigator.geolocation.getCurrentPosition(successCallback,errorCallback,options);
+        }
+
+        function successCallback(position){
+            var lat =position.coords.latitude;
+            var lng =position.coords.longitude;
+
+            displayKaKaoMap(lat,lng);
+
+        }
+
+        function displayKaKaoMap(lat,lng){
+            var container = document.getElementById('map'); // 지도를 표시할 div 
+            var option = { 
+                 center: new kakao.maps.LatLng(lat,lng), // 지도의 중심좌표
                 level: 3 // 지도의 확대 레벨
-    };
-        var map =new kakao.maps.Map(mapContainer, mapOption);
+            };
+        map =new kakao.maps.Map(container, option);
+        }
         </script>
     
 </body>
