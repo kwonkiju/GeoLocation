@@ -40,6 +40,15 @@
 
         }
 
+        var errorCallback=function(error) {
+            switch(error.code){
+                case 1:span.innerHTML='허용이 거부된' ;break;
+                case 2:span.innerHTML='위치 확인 불가' ;break;
+                case 3:span.innerHTML='시간 초과' ;break;
+                default:span.innerHTML=error.message;
+            }
+        };
+
         function displayKaKaoMap(lat,lng){
             var container = document.getElementById('map'); // 지도를 표시할 div 
             var option = { 
