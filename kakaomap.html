@@ -20,7 +20,8 @@
     </fieldset>
     
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc687eb6e7836133082e4ee067adcd4f"></script>
-        <script>
+       
+       <script>
         var map;
 
         if(navigator.geolocation){
@@ -46,7 +47,19 @@
                 level: 3 // 지도의 확대 레벨
             };
         map =new kakao.maps.Map(container, option);
+
+        setMarker(lat,lng);
         }
+
+        var setMarker=function(lat,lng){
+            var markerPosition  = new kakao.maps.LatLng(lat,lng); 
+
+    // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+            position: markerPosition
+});
+
+        };
         </script>
     
 </body>
