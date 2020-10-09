@@ -12,7 +12,10 @@
     <div id="map" style="width: 500px; height: 400px;"></div> <!--지도 표현 영역 id는 map-->
     <p>
         <button onclick="setCenter()">지도 중심좌표 이동시키기</button>
-        <button onclick="panTo()">지도 부드럽게 이동시키기</button>
+        <button onclick="panTo()">지도 부드럽게 이동시키기</button><br/>
+        <button onclick="zoonIn()">지도 레벨 -1</button>
+        <button onclick="zoomOut()">지도 레벨 +1</button>
+        <span id="maplevel"></span>
     </p> 
     
     <script type="text/javascript" 
@@ -47,6 +50,15 @@
             var moveLatLon = new kakao.maps.LatLng(33.450580, 126.574942);
 
             map.panTo(moveLatLon);
+        }
+
+        function zoomIn(){
+            var level =map.getLevel();
+
+            map.setLevel(level - 1);
+
+            var spanLevel =document.getElementById('maplevel');
+            spanLevel.innerHTML ="현재 지도 레벨은 "+level+"입니다";
         }
        
     </script>
