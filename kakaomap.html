@@ -36,6 +36,10 @@
 
         var map = new kakao.maps.Map(container,option)
 
+        var mapTypeControl =new kakao.maps.MapTypeControl();
+
+        map.addControl(mapTypeControl,kakao.maps.ControlPosition.TOPRIGHT);
+
         
 
         //button onclick setCenter()함수와 panTo()함수 정의하기
