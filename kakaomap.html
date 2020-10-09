@@ -86,17 +86,17 @@
 
         function setDraggable(draggable){
             
-            document.write(map.getDraggable());
+            
             
 
             var draggableSpan =document.getElementById('drggable');
 
             if(option.draggable == true){
                 draggableSpan.innerHTML ="끄기";
-                map.setDraggable(!draggable);
+                map.setDraggable(!(map.getDraggable()));
             }else{
                 draggableSpan.innerHTML ="켜기";
-                map.setDraggable(!draggable);
+                map.setDraggable(!(map.getDraggable()));
                 }
 
 
