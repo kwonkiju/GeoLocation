@@ -86,7 +86,7 @@
 
         function setDraggable(draggable){
             
-            var draggableOp =false;
+            var draggableOp =map.getDraggable();
             
 
             var draggableSpan =document.getElementById('drggable');
@@ -94,12 +94,12 @@
             if(draggableOp == true){
                 draggableSpan.innerHTML ="끄기";
                 map.setDraggable(!(map.getDraggable()));
-                draggableOp != draggableOp
+                
                 
             }else{
                 draggableSpan.innerHTML ="켜기";
                 map.setDraggable(!(map.getDraggable()));
-                draggableOp != draggableOp
+                
                 }
 
 
