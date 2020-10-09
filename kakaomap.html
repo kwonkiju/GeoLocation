@@ -64,9 +64,9 @@
 
         //지도에 클릭 이벤트 등록
 
-        kakao.maps.event.addListener(map, 'click', function(MouseEvent){
-            var clickLat =MouseEvent.LatLng.getLat();
-            var clickLng =MouseEvent.LatLng.getLng();
+        kakao.maps.event.addListener(map, 'click', function(mouseEvent){
+            var clickLat =mouseEvent.latLng.getLat();
+            var clickLng =mouseEvent.latLng.getLng();
 
             document.getElementById('clicklatlng').innerHTML ='위도 :'+clickLat+', 경도 :'+clickLng;
         });
