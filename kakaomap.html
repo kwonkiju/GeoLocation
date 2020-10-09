@@ -88,16 +88,18 @@
             
             
 
-            map.setDraggable(!draggable);
+            map.setDraggable(draggable);
 
-            option.draggable = !option.draggable;
+            
 
             var draggableSpan =document.getElementById('drggable');
 
             if(option.draggable == true){
                 draggableSpan.innerHTML ="끄기";
+                option.draggable = !option.draggable;
             }else{
                 draggableSpan.innerHTML ="켜기";
+                option.draggable = !option.draggable;
             }
 
 
