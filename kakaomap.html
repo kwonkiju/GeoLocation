@@ -42,6 +42,7 @@
 
         var mapTypeControl =new kakao.maps.MapTypeControl();
         var zoomControl =new kakao.maps.ZoomControl();
+        var zoomableOp =option.zoomable;
 
         map.addControl(mapTypeControl,kakao.maps.ControlPosition.TOPLEFT);
         map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
@@ -108,22 +109,20 @@
 
         }
 
-        function setZoomable(zoomable){
+        function setZoomable(){
             
-            var zoomableOp =map.getZoomable();
-            
-
             var zoomableSpan =document.getElementById('zoomable');
 
             if(zoomableOp == true){
                 zoomableSpan.innerHTML ="켜기";
-                map.setZoomable(!(map.getZoomable()));
+                map.setZoomable(!zoomableOp);
+                zoomableOp = !zoomableOp;
                 
                 
             }else{
                 zoomableSpan.innerHTML ="끄기";
-                map.setZoomable(!(map.getZoomable()));
-                
+                map.setZoomable(!zoomableOp);
+                zoomableOp = !zoomableOp;
                 }
 
 
