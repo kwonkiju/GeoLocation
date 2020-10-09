@@ -10,13 +10,16 @@
 <body>
     
     <div id="map" style="width: 500px; height: 400px;"></div> <!--지도 표현 영역 id는 map-->
-     <script type="text/javascript" 
+    <p>
+        <button onclick="setCenter()">지도 중심좌표 이동시키기</button>
+        <button onclick="panTo()">지도 부드럽게 이동시키기</button>
+    </p> 
+    
+    <script type="text/javascript" 
     
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc687eb6e7836133082e4ee067adcd4f&libraries=services">
     //지도를 그리는 Javascript Api를 src에 kakaomap appkey로 불러옴
     </script>
-     
-     
      
      <script> 
      //지도 띄우기
@@ -24,11 +27,19 @@
 
         var option ={
 
-            center : new kakao.maps.LatLng(33.450701, 126.570667),
+            center : new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표를 넣어서 표시하기위한 속성
             level :3
         };
 
         var map = new kakao.maps.Map(container,option)
+
+        //button onclick setCenter()함수와 panTo()함수 정의하기
+        function setCenter(){
+
+            var moveLatLon = new kakao.maps.LatLng(33.450701, 126.570667);
+
+            map.setCenter(moveLatLon);
+        }
        
     </script>
 
