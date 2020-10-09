@@ -63,6 +63,8 @@
             position : map.getCenter()
         });
 
+        
+
         map.addControl(mapTypeControl,kakao.maps.ControlPosition.TOPLEFT);
         map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
@@ -75,6 +77,13 @@
 
             document.getElementById('clicklatlng').innerHTML ='위도 :'+clickLat+', 경도 :'+clickLng;
         });
+
+        kakao.maps.event.addListener(map,'zoom_changed',function(){
+            
+            var spanLevel =document.getElementById('maplevel');
+
+            spanLevel.innerHTML="현재 지도 레벨은 "+map.getLevel()+"입니다";
+        })
 
         marker.setMap(map); //지도에 마커표시
     
