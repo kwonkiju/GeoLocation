@@ -19,7 +19,9 @@
         <button onclick="setDraggable(draggable)">지도 드래그 이동 <span id="drggable">켜기</span></button>
         <button onclick="setZoomable(zoomable)">줌 확대 축소 <span id="zoomable">켜기</span></button><br/>
         <button onclick="setTraffic()">교통 정보 표시</button>
-        <button onclick="removeTraffic()">교통 정보 표시 제거</button>
+        <button onclick="removeTraffic()">교통 정보 표시 제거</button><br/>
+        <button onclick="setRoadview()">로드뷰 표시</button>
+        <button onclick="removeRoadview()">로드뷰 표시 제거</button>
 
     </p> 
     
@@ -138,7 +140,17 @@
         function removeTraffic(){
 
             map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
-}
+        }
+
+         function setRoadview(){
+
+            map.addOverlayMapTypeId(kakao.maps.MapTypeId.ROADVIEW);
+        }
+
+        function removeRoadview(){
+
+            map.removeOverlayMapTypeId(kakao.maps.MapTypeId.ROADVIEW);
+        }
        
     </script>
 
