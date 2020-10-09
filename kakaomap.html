@@ -86,9 +86,11 @@
 
         function setDraggable(draggable){
             
-            !option.draggable;
+            
 
-            map.setDraggable(draggable);
+            map.setDraggable(!draggable);
+
+            option.draggable = !option.draggable;
 
             var draggableSpan =document.getElementById('drggable');
 
