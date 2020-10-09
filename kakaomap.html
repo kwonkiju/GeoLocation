@@ -11,7 +11,7 @@
     
     <div id="map" style="width: 500px; height: 400px;"></div> <!--지도 표현 영역 id는 map-->
     <p>
-        <span id='clicklatlng'>지도를 클릭하면 클릭하신곳의 위도와 경도를 알 수 있습니다.</span>
+        <span id='clicklatlng'>지도를 클릭하면 클릭하신곳의 위도와 경도를 알 수 있습니다.</span></br>
         <button onclick="setCenter()">지도 중심좌표 이동시키기</button>
         <button onclick="panTo()">지도 부드럽게 이동시키기</button><br/>
         <button onclick="zoomIn()">지도 레벨 -1</button>
@@ -59,6 +59,10 @@
                          useDistrict : kakao.maps.MapTypeId.USE_DISTRICT
                         };
 
+        var marker = new kakao.maps.Marker({ //지도중심에 마커생성
+            position : map.getCenter()
+        });
+
         map.addControl(mapTypeControl,kakao.maps.ControlPosition.TOPLEFT);
         map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
@@ -67,10 +71,12 @@
         kakao.maps.event.addListener(map, 'click', function(mouseEvent){
             var clickLat =mouseEvent.latLng.getLat();
             var clickLng =mouseEvent.latLng.getLng();
+            marker.setPosition(mouseEvent.latLng);
 
             document.getElementById('clicklatlng').innerHTML ='위도 :'+clickLat+', 경도 :'+clickLng;
         });
 
+        marker.setMap(map); //지도에 마커표시
     
 
         
