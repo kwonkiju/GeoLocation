@@ -17,6 +17,8 @@
         <button onclick="zoomOut()">지도 레벨 +1</button>
         <span id="maplevel"></span><br/>
         <button onclick="setDraggable(draggable)">지도 드래그 이동 <span id="drggable">켜기</span></button>
+        <button onclick="setZoomable(zoomable)">줌 확대 축소 <span id="zoomable">켜기</span></button>
+
     </p> 
     
     <script type="text/javascript" 
@@ -32,6 +34,7 @@
         var option ={
             center : new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표를 넣어서 표시하기위한 속성
             draggable : false,
+            zoomable : false,
             level :3
         };
 
@@ -99,6 +102,27 @@
             }else{
                 draggableSpan.innerHTML ="끄기";
                 map.setDraggable(!(map.getDraggable()));
+                
+                }
+
+
+        }
+
+        function setZoomable(zoomable){
+            
+            var zoomableOp =map.getZoomable();
+            
+
+            var zoomableSpan =document.getElementById('zoomable');
+
+            if(zoomableOp == true){
+                zoomableSpan.innerHTML ="켜기";
+                map.setZoomable(!(map.getZoomable()));
+                
+                
+            }else{
+                zoomableSpan.innerHTML ="끄기";
+                map.setZoomable(!(map.getZoomable()));
                 
                 }
 
