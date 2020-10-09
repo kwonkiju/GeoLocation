@@ -17,7 +17,9 @@
         <button onclick="zoomOut()">지도 레벨 +1</button>
         <span id="maplevel"></span><br/>
         <button onclick="setDraggable(draggable)">지도 드래그 이동 <span id="drggable">켜기</span></button>
-        <button onclick="setZoomable(zoomable)">줌 확대 축소 <span id="zoomable">켜기</span></button>
+        <button onclick="setZoomable(zoomable)">줌 확대 축소 <span id="zoomable">켜기</span></button><br/>
+        <button onclick="setTraffic()">교통 정보 표시</button>
+        <button onclick="removeTraffic()">교통 정보 표시 제거</button>
 
     </p> 
     
@@ -127,6 +129,16 @@
 
 
         }
+
+        function setTraffic(){
+
+            map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+        }
+
+        function removeTraffic(){
+
+            map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+}
        
     </script>
 
