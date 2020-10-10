@@ -15,7 +15,7 @@
         <button onclick="panTo()">지도 부드럽게 이동시키기</button><br />
         <button onclick="manyMarker()">여러개 마커 표시하기</button><br />
         <span id="maplevel"></span><br />
-        <button onclick="realHideMarker()">마커 감추기</button>
+        <button onclick="hideMarkers()">마커 감추기</button>
         <button onclick="realShowMarker()">마커 보이기</button>
     </p>
 
@@ -82,10 +82,7 @@
                 setMarkers(map);
             }
 
-            function hideMarkers(){
-
-                setMarkers(null);
-            }
+        
            
                 
 
@@ -111,10 +108,13 @@
         }
 
     
-                
-        function realHideMarker(){
-            hideMarkers();
+        function hideMarkers(){
+
+        setMarkers(null);
+        
         }
+                
+      
         function realShowMarker(){
             showMarkers();
         }
