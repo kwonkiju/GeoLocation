@@ -143,6 +143,15 @@
                 // 클릭한 위치에 마커를 표시합니다 
                 addMarker(mouseEvent.latLng);
             });
+
+            function addMarker(position){
+                var marker =new kakao.maps.Marker({
+                    position : position
+                });
+
+                marker.setMap(map);
+
+            }
         }
 
     </script>
