@@ -47,9 +47,25 @@
                         var lng =position.coords.longitude;
 
                         displayKaKaoMap(lat,lng);
-            });
+                        function setCenter(){
 
-            var mapTypeControl =new kakao.maps.MapTypeControl();
+            var moveLatLon = new kakao.maps.LatLng(33.450701, 126.570667);
+
+            map.setCenter(moveLatLon);
+        }
+
+        function panTo(){
+            var moveLatLon = new kakao.maps.LatLng(33.450580, 126.574942);
+
+            map.panTo(moveLatLon);
+        }
+                        
+            });
+        }else{
+            document.write('geolocation을 사용할 수 없어요');
+        }
+     
+        var mapTypeControl =new kakao.maps.MapTypeControl();
         var zoomControl =new kakao.maps.ZoomControl();
         var zoomableOp =option.zoomable;
         var mapTypes = {
@@ -130,11 +146,6 @@
         
         //marker.setDraggable(true); //마커 드래그가능하게
 
-        }else{
-            document.write('geolocation을 사용할 수 없어요');
-        }
-     
-       
         //지도 띄우기
 
         function displayKaKaoMap(lat,lng){
@@ -154,18 +165,7 @@
         
 
         //button onclick setCenter()함수와 panTo()함수 정의하기
-        function setCenter(){
-
-            var moveLatLon = new kakao.maps.LatLng(33.450701, 126.570667);
-
-            map.setCenter(moveLatLon);
-        }
-
-        function panTo(){
-            var moveLatLon = new kakao.maps.LatLng(33.450580, 126.574942);
-
-            map.panTo(moveLatLon);
-        }
+        
         //zoomIn함수 (확대) ,zoomOut함수 (축소)
         function zoomIn(){
             var level =map.getLevel();
