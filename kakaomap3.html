@@ -96,12 +96,14 @@
                 markers.push(marker);
             }
 
-            function setMarkers(map){
+            
+        }
+        
+        function setMarkers(map){
                 for(var i=0; i<markers.length; i++){
                     markers[i].setMap(map);
                 }
             }
-        }
 
         function showMarkers(){
                 setMarkers(map);
