@@ -63,7 +63,6 @@
         var iwContent ='<div style="padding:5px;"> 현재위치</div>' //인포윈도우 내용
 
         var infowindow =new kakao.maps.InfoWindow({
-            map : map,
             position : map.getCenter(),
             content : iwContent,
             removable : true
@@ -106,6 +105,7 @@
         })
 
         marker.setMap(map); //지도에 마커표시
+        infowindow.open(map,marker);
         //marker.setDraggable(true); //마커 드래그가능하게
 
         
