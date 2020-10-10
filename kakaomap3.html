@@ -11,8 +11,25 @@
     <div id="map" style="width: 500px; height: 400px;"></div>
     <!--지도 표현 영역 id는 map-->
     <p>
+        <span id='clicklatlng'>지도를 클릭하면 클릭하신곳의 위도와 경도를 알 수 있습니다.</span></br>
         <button onclick="setCenter()">지도 중심좌표 이동시키기</button>
         <button onclick="panTo()">지도 부드럽게 이동시키기</button><br />
+        <button onclick="zoomIn()">지도 레벨 -1</button>
+        <button onclick="zoomOut()">지도 레벨 +1</button>
+        <span id="maplevel"></span><br />
+        <button onclick="setDraggable(draggable)">지도 드래그 이동 <span id="drggable">켜기</span></button>
+        <button onclick="setZoomable(zoomable)">줌 확대 축소 <span id="zoomable">켜기</span></button><br />
+        <button onclick="setTraffic()">교통 정보 표시</button>
+        <button onclick="removeTraffic()">교통 정보 표시 제거</button><br />
+        <button onclick="setRoadview()">로드뷰 표시</button>
+        <button onclick="removeRoadview()">로드뷰 표시 제거</button><br />
+        <button onclick="setTerrain()">지형도 표시</button>
+        <button onclick="removeTerrain()">지형도 표시 제거</button>
+
+        <input type="checkbox" id="chkUseDistrict" onclick="setOverlayMapTypeId()" /><label for="chkUseDistrict"> 지적편집도
+            정보 보기</label>
+        <input type="checkbox" id="chkBicycle" onclick="setOverlayMapTypeId()" /> <label for="chkBicycle">자전거도로 정보
+            보기</label>
     </p>
 
     <script type="text/javascript"
@@ -21,13 +38,15 @@
         </script>
 
     <script>
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-            mapOption = {
-                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-                level: 10 // 지도의 확대 레벨 
+        var container = document.getElementById('map'), // 지도를 표시할 div 
+            option = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표를 넣어서 표시하기위한 속성
+                draggable: false,
+                zoomable: false,
+                level: 3
             };
 
-        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+        var map = new kakao.maps.Map(container, option); // 지도를 생성합니다
 
         // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
         if (navigator.geolocation) {
@@ -38,26 +57,80 @@
                 var lat = position.coords.latitude, // 위도
                     lon = position.coords.longitude; // 경도
 
-                var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-                    message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+                var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 
+                var mapTypeControl = new kakao.maps.MapTypeControl();
+                var zoomControl = new kakao.maps.ZoomControl();
+                var zoomableOp = option.zoomable;
+                var mapTypes = {
+                    terrain: kakao.maps.MapTypeId.TERRAIN,
+                    traffic: kakao.maps.MapTypeId.TRAFFIC,
+                    bicycle: kakao.maps.MapTypeId.BICYCLE,
+                    useDistrict: kakao.maps.MapTypeId.USE_DISTRICT
+                };
+
+                //인포윈도우 생성
+                var iwContent = '<div style="padding:5px;"> 현재위치</div>' //인포윈도우 내용
+
+                var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+                    imageSize = new kakao.maps.Size(50, 69), // 마커이미지의 크기입니다
+                    imageOption = { offset: new kakao.maps.Point(18, 64) }; //마커의 좌표와 클릭 좌표가 일치하게 설정하는 옵션
+
+                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+
+                map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPLEFT);
+                map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+                //지도에 클릭 이벤트 등록
+
+                kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+                    var clickLat = mouseEvent.latLng.getLat();
+                    var clickLng = mouseEvent.latLng.getLng();
+                    marker.setPosition(mouseEvent.latLng);
+                    infowindow.setPosition(mouseEvent.latLng);
+
+                    document.getElementById('clicklatlng').innerHTML = '위도 :' + clickLat + ', 경도 :' + clickLng;
+                });
+
+                kakao.maps.event.addListener(map, 'zoom_changed', function () {
+
+                    var spanLevel = document.getElementById('maplevel');
+
+                    spanLevel.innerHTML = "현재 지도 레벨은 " + map.getLevel() + "입니다";
+                })
+
+                /*마커에 클릭 이벤트 등록
+                kakao.maps.event.addListener(marker, 'click', function(mouseEvent){
+        
+                    infowindow.open(map,marker);
+                   
+                });*/
+
+                //마커에 마우스가 올라갈때 이벤트 등록
+                kakao.maps.event.addListener(marker, 'mouseover', function () {
+
+                    infowindow.open(map, marker);
+
+                });
+
+                //마커에 마우스가 나갈때 이벤트 등록
+                kakao.maps.event.addListener(marker, 'mouseout', function () {
+
+                    infowindow.close();
+
+                });
                 // 마커와 인포윈도우를 표시합니다
                 var marker = new kakao.maps.Marker({
                     map: map,
-                    position: locPosition
+                    position: locPosition,
+                    image: markerImage
                 });
-
-                var iwContent = message, // 인포윈도우에 표시할 내용
-                    iwRemoveable = true;
 
                 // 인포윈도우를 생성합니다
                 var infowindow = new kakao.maps.InfoWindow({
                     content: iwContent,
-                    removable: iwRemoveable
+                    removable: true
                 });
-
-                // 인포윈도우를 마커위에 표시합니다 
-                infowindow.open(map, marker);
 
                 // 지도 중심좌표를 접속위치로 변경합니다
                 map.setCenter(locPosition);
@@ -72,7 +145,7 @@
             displayMarker(locPosition, message);
         }
 
-        function setCenter(){
+        function setCenter() {
 
             var moveLatLon = new kakao.maps.LatLng(33.450701, 126.570667);
 
