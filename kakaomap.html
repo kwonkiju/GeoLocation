@@ -94,8 +94,7 @@
             var clickLng =mouseEvent.latLng.getLng();
             marker.setPosition(mouseEvent.latLng);
             infowindow.setPosition(mouseEvent.latLng);
-            infowindow.open(map,marker);
-
+            
             document.getElementById('clicklatlng').innerHTML ='위도 :'+clickLat+', 경도 :'+clickLng;
         });
 
@@ -105,6 +104,12 @@
 
             spanLevel.innerHTML="현재 지도 레벨은 "+map.getLevel()+"입니다";
         })
+
+        //마커에 클릭 이벤트 등록
+        kakao.maps.event.addListener(marker, 'click', function(mouseEvent){
+
+            infowindow.open(map,marker);
+        });
 
         marker.setMap(map); //지도에 마커표시
         
