@@ -78,7 +78,8 @@
 
         var marker = new kakao.maps.Marker({ //지도중심에 마커생성
             position : map.getCenter(),
-            image : markerImage
+            image : markerImage,
+            clickable :true
         });
 
         
@@ -93,6 +94,7 @@
             var clickLng =mouseEvent.latLng.getLng();
             marker.setPosition(mouseEvent.latLng);
             infowindow.setPosition(mouseEvent.latLng);
+            infowindow.open(map,marker);
 
             document.getElementById('clicklatlng').innerHTML ='위도 :'+clickLat+', 경도 :'+clickLng;
         });
@@ -104,8 +106,8 @@
             spanLevel.innerHTML="현재 지도 레벨은 "+map.getLevel()+"입니다";
         })
 
-       //지도에 마커표시
-        infowindow.open(map,marker);
+        marker.setMap(map); //지도에 마커표시
+        
         //marker.setDraggable(true); //마커 드래그가능하게
 
         
