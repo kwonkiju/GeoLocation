@@ -63,6 +63,22 @@
                 addMarker(mouseEvent.latLng);
             });
 
+            function addMarker(position){
+                var marker =new kakao.maps.Marker({
+                    position : position
+                });
+
+                marker.setMap(map);
+
+                markers.push(marker);
+            }
+
+            function setMarkers(map){
+                for(var i=0; i<markers.length; i++){
+                    markers[i].setMap(map);
+                }
+            }
+
             
 
             });
@@ -85,24 +101,7 @@
 
             map = new kakao.maps.Map(container, option); // 지도를 생성합니다
         }
-
-        function addMarker(position){
-                var marker =new kakao.maps.Marker({
-                    position : position
-                });
-
-                marker.setMap(map);
-
-                markers.push(marker);
-            }
-
-            function setMarkers(map){
-                for(var i=0; i<markers.length; i++){
-                    markers[i].setMap(map);
-                }
-            }
-
-            function showMarkers(){
+          function showMarkers(){
                 setMarkers(map);
             }
 
