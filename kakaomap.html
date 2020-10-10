@@ -47,7 +47,8 @@
                         var lng =position.coords.longitude;
 
                         displayKaKaoMap(lat,lng);
-                        function setCenter(){
+                         });
+                         function setCenter(){
 
             var moveLatLon = new kakao.maps.LatLng(33.450701, 126.570667);
 
@@ -59,8 +60,6 @@
 
             map.panTo(moveLatLon);
         }
-                        
-            });
         }else{
             document.write('geolocation을 사용할 수 없어요');
         }
