@@ -55,7 +55,30 @@
 
                 spanLevel.innerHTML = "현재 지도 레벨은 " + map.getLevel() + "입니다";
             });
+                jotgatne();
 
+            });
+
+        } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+            var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+                message = 'geolocation을 사용할수 없어요..'
+
+            displayMarker(locPosition, message);
+        }
+
+        function displayKakaoMap(lat, lgn) {
+
+            var container = document.getElementById('map'), // 지도를 표시할 div 
+                option = {
+                    center: new kakao.maps.LatLng(lat, lgn), // 지도의 중심좌표
+                    level: 3 // 지도의 확대 레벨 
+                };
+
+            map = new kakao.maps.Map(container, option); // 지도를 생성합니다
+        }
+
+        function jotgatne(){
                 var markers =[];
 
                  kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
@@ -78,28 +101,6 @@
                     markers[i].setMap(map);
                 }
             }
-
-            
-
-            });
-
-        } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-
-            var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
-                message = 'geolocation을 사용할수 없어요..'
-
-            displayMarker(locPosition, message);
-        }
-
-        function displayKakaoMap(lat, lgn) {
-
-            var container = document.getElementById('map'), // 지도를 표시할 div 
-                option = {
-                    center: new kakao.maps.LatLng(lat, lgn), // 지도의 중심좌표
-                    level: 3 // 지도의 확대 레벨 
-                };
-
-            map = new kakao.maps.Map(container, option); // 지도를 생성합니다
         }
           function showMarkers(){
                 setMarkers(map);
