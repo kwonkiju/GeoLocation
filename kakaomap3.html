@@ -15,6 +15,8 @@
         <button onclick="panTo()">지도 부드럽게 이동시키기</button><br />
         <button onclick="manyMarker()">여러개 마커 표시하기</button><br />
         <span id="maplevel"></span><br />
+        <button onclick="hideMarkers()">마커 감추기</button>
+        <button onclick="showMarkers()">마커 보이기</button>
     </p>
 
     <script type="text/javascript"
@@ -53,6 +55,9 @@
 
                 spanLevel.innerHTML = "현재 지도 레벨은 " + map.getLevel() + "입니다";
             });
+
+                var markers =[];
+
                  kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
                 // 클릭한 위치에 마커를 표시합니다 
                 addMarker(mouseEvent.latLng);
@@ -88,6 +93,21 @@
 
                 marker.setMap(map);
 
+                markers.push(marker);
+            }
+
+            function setMarkers(map){
+                for(var i=0; i<markers.length; i++){
+                    markers[i].setMap(map);
+                }
+            }
+
+            function showMarkers(){
+                setMarkers(map);
+            }
+
+            function hideMarkers(){
+                setMarkers(null);
             }
 
         function setCenter() {
