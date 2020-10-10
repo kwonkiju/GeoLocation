@@ -109,6 +109,7 @@
         kakao.maps.event.addListener(marker, 'click', function(mouseEvent){
 
             infowindow.open(map,marker);
+            marker.setClickable(!clickable);
         });
 
         marker.setMap(map); //지도에 마커표시
