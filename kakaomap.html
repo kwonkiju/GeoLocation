@@ -93,6 +93,7 @@
             var clickLat =mouseEvent.latLng.getLat();
             var clickLng =mouseEvent.latLng.getLng();
             marker.setPosition(mouseEvent.latLng);
+            infowindow.setPosition(mouseEvent.latLng);
 
             document.getElementById('clicklatlng').innerHTML ='위도 :'+clickLat+', 경도 :'+clickLng;
         });
