@@ -144,13 +144,13 @@
         //button onclick setCenter()함수와 panTo()함수 정의하기
         function setCenter(){
 
-            var moveLatLon = new kakao.maps.LatLng(33.450701, 126.570667);
+            var moveLatLon = new kakao.maps.LatLng(lat, lng);
 
             map.setCenter(moveLatLon);
         }
 
         function panTo(){
-            var moveLatLon = new kakao.maps.LatLng(33.450580, 126.574942);
+            var moveLatLon = new kakao.maps.LatLng(lat, lng);
 
             map.panTo(moveLatLon);
         }
