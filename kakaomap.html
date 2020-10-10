@@ -47,12 +47,8 @@
                         var lng =position.coords.longitude;
 
                         displayKaKaoMap(lat,lng);
-            });
-        }else{
-            document.write('geolocation을 사용할 수 없어요');
-        }
-     
-        var mapTypeControl =new kakao.maps.MapTypeControl();
+
+                         var mapTypeControl =new kakao.maps.MapTypeControl();
         var zoomControl =new kakao.maps.ZoomControl();
         var zoomableOp =option.zoomable;
         var mapTypes = {
@@ -133,6 +129,12 @@
         
         //marker.setDraggable(true); //마커 드래그가능하게
 
+            });
+        }else{
+            document.write('geolocation을 사용할 수 없어요');
+        }
+     
+       
         //지도 띄우기
 
         function displayKaKaoMap(lat,lng){
