@@ -64,8 +64,8 @@
 
         var infowindow =new kakao.maps.InfoWindow({
             position : map.getCenter(),
-            content : iwContent,
-            removable : true
+            content : iwContent
+            //removable : true //클릭이벤트 사용할때
         });
 
         //마커 이미지 소스,크기,옵션
@@ -78,8 +78,8 @@
 
         var marker = new kakao.maps.Marker({ //지도중심에 마커생성
             position : map.getCenter(),
-            image : markerImage,
-            clickable :true
+            image : markerImage
+            //clickable :true //클릭이벤트 사용할때
         });
 
         
@@ -105,11 +105,25 @@
             spanLevel.innerHTML="현재 지도 레벨은 "+map.getLevel()+"입니다";
         })
 
-        //마커에 클릭 이벤트 등록
+        /*마커에 클릭 이벤트 등록
         kakao.maps.event.addListener(marker, 'click', function(mouseEvent){
 
             infowindow.open(map,marker);
-            marker.setClickable(!clickable);
+           
+        });*/
+
+        //마커에 마우스가 올라갈때 이벤트 등록
+        kakao.maps.event.addListener(marker, 'mouseover', function(){
+
+            infowindow.open(map,marker);
+
+        });
+
+         //마커에 마우스가 나갈때 이벤트 등록
+        kakao.maps.event.addListener(marker, 'mouseout', function(){
+
+            infowindow.close();
+
         });
 
         marker.setMap(map); //지도에 마커표시
