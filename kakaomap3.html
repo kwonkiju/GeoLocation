@@ -58,14 +58,7 @@
                 addMarker(mouseEvent.latLng);
             });
 
-            function addMarker(position){
-                var marker =new kakao.maps.Marker({
-                    position : position
-                });
-
-                marker.setMap(map);
-
-            }
+            
 
             });
 
@@ -87,6 +80,15 @@
 
             map = new kakao.maps.Map(container, option); // 지도를 생성합니다
         }
+
+        function addMarker(position){
+                var marker =new kakao.maps.Marker({
+                    position : position
+                });
+
+                marker.setMap(map);
+
+            }
 
         function setCenter() {
             // 이동할 위도 경도 위치를 생성합니다 
