@@ -140,17 +140,6 @@
         
         //marker.setDraggable(true); //마커 드래그가능하게
 
-                    
-            });
-        }else{
-            document.write('geolocation을 사용할 수 없어요');
-        }
-     //지도 띄우기
-       
-
-        
-
-        
 
         //button onclick setCenter()함수와 panTo()함수 정의하기
         function setCenter(){
@@ -264,9 +253,12 @@
             if(chkUseDistrict.checked){
                 map.addOverlayMapTypeId(mapTypes.useDistrict);
             }
+        }    
+            });
+        }else{
+            document.write('geolocation을 사용할 수 없어요');
         }
-       
-       
+     //지도 띄우기  
     </script>
 
 
