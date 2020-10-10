@@ -22,26 +22,27 @@
 
     <script>
         var map;
-       // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+        var lat, lgn;
+        // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
         if (navigator.geolocation) {
 
             // GeoLocation을 이용해서 접속 위치를 얻어옵니다
             navigator.geolocation.getCurrentPosition(function (position) {
 
-                var lat = position.coords.latitude, // 위도
+                    lat = position.coords.latitude; // 위도
                     lgn = position.coords.longitude; // 경도
 
-                    displayKakaoMap(lat,lgn);
+                displayKakaoMap(lat, lgn);
 
                 var locPosition = new kakao.maps.LatLng(lat, lgn);// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-                    
+
 
                 // 마커 표시
                 var marker = new kakao.maps.Marker({
                     map: map,
                     position: locPosition
                 });
-             // 지도 중심좌표를 접속위치로 변경합니다
+                // 지도 중심좌표를 접속위치로 변경합니다
                 map.setCenter(locPosition);
 
             });
@@ -54,15 +55,32 @@
             displayMarker(locPosition, message);
         }
 
-        function displayKakaoMap(lat,lgn){
+        function displayKakaoMap(lat, lgn) {
 
             var container = document.getElementById('map'), // 지도를 표시할 div 
-            option = {
-                center: new kakao.maps.LatLng(lat,lgn), // 지도의 중심좌표
-                level: 10 // 지도의 확대 레벨 
-            };
+                option = {
+                    center: new kakao.maps.LatLng(lat, lgn), // 지도의 중심좌표
+                    level: 10 // 지도의 확대 레벨 
+                };
 
             map = new kakao.maps.Map(container, option); // 지도를 생성합니다
+        }
+
+        function setCenter() {
+            // 이동할 위도 경도 위치를 생성합니다 
+            var moveLatLon = new kakao.maps.LatLng(33.452613, 126.570888);
+
+            // 지도 중심을 이동 시킵니다
+            map.setCenter(moveLatLon);
+        }
+
+        function panTo() {
+            // 이동할 위도 경도 위치를 생성합니다 
+            var moveLatLon = new kakao.maps.LatLng(lat, lgn);
+
+            // 지도 중심을 부드럽게 이동시킵니다
+            // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+            map.panTo(moveLatLon);
         }
 
     </script>
