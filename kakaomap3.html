@@ -27,6 +27,7 @@
     <script>
         var map;
         var lat, lgn;
+        var markers =[];
         // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
         if (navigator.geolocation) {
 
@@ -56,7 +57,7 @@
                 spanLevel.innerHTML = "현재 지도 레벨은 " + map.getLevel() + "입니다";
             });
 
-             var markers =[];
+            
 
                  kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
                 // 클릭한 위치에 마커를 표시합니다 
@@ -72,12 +73,7 @@
 
                 markers.push(marker);
             }
-            function setMarkers(map){
-                console.log(markers.length);
-                for(var i=0; i<markers.length; i++){
-                    markers[i].setMap(map);
-                }
-            }
+          
             function showMarkers(){
                 setMarkers(map);
             }
@@ -111,9 +107,14 @@
         function hideMarkers(){
 
         setMarkers(null);
-        
+
         }
-                
+        function setMarkers(map){
+                console.log(markers.length);
+                for(var i=0; i<markers.length; i++){
+                    markers[i].setMap(map);
+                }
+            }       
       
         function realShowMarker(){
             showMarkers();
