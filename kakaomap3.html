@@ -57,6 +57,12 @@
         spanLevel.innerHTML = "현재 지도 레벨은 " + map.getLevel() + "입니다";
             });
 
+            kakao.maps.event.addListener(marker, 'click', function() {
+             // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+                    infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+                    infowindow.open(map, marker);
+                 });
+
                 
 
                 locPosition = new kakao.maps.LatLng(lat, lgn);// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
@@ -93,11 +99,7 @@
                 position: new kakao.maps.LatLng(place.y, place.x) 
                  });
 
-                 kakao.maps.event.addListener(marker, 'click', function() {
-             // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-                    infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-                    infowindow.open(map, marker);
-                 });
+                
             }
 
 
