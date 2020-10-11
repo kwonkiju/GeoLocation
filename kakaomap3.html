@@ -246,12 +246,14 @@
             // 마커가 지도 위에 표시되도록 설정합니다
             marker.setMap(map);
 
-            var infowindow = new kakao.maps.InfoWindow({
+            infowindow = new kakao.maps.InfoWindow({
                 map: map, // 인포윈도우가 표시될 지도
                 position: new kakao.maps.LatLng(lat, lng),
                 content: '<div style="padding:5px;">현재 내위치 입니다</div>',
                 removable: iwRemoveable
             });
+
+            infowindow.open(map,marker);
         }
 
         // 장소 검색 객체를 생성합니다
