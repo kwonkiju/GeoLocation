@@ -38,6 +38,17 @@
                 lat = position.coords.latitude; // 위도
                 lgn = position.coords.longitude; // 경도
 
+                var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                mapOption = {
+                center: new kakao.maps.LatLng(lat,lgn), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+                 };  
+
+// 지도를 생성합니다    
+                map = new kakao.maps.Map(mapContainer, mapOption); 
+
+                map.setCenter(lat,lgn);
+
                 
 
                 locPosition = new kakao.maps.LatLng(lat, lgn);// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
@@ -52,16 +63,7 @@
             
         }
         
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-             mapOption = {
-             center: new kakao.maps.LatLng(lat,lgn), // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
-        };  
-
-// 지도를 생성합니다    
-        map = new kakao.maps.Map(mapContainer, mapOption); 
-
-        map.setCenter(lat,lgn);
+        
        
         kakao.maps.event.addListener(map, 'zoom_changed', function () {
 
