@@ -49,8 +49,13 @@
 
 // 지도를 생성합니다    
                 map = new kakao.maps.Map(mapContainer, mapOption); 
+                locPosition = new kakao.maps.LatLng(lat, lgn);
+                marker =new kakao.maps.Marker({
+                    position : locPosition,
+                    clickable :true
+                });
 
-               
+                marker.setMap(map);
 
                  kakao.maps.event.addListener(map, 'zoom_changed', function () {
 
@@ -63,7 +68,7 @@
 
                 
 
-                locPosition = new kakao.maps.LatLng(lat, lgn);// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+                // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 
             });
 
@@ -92,7 +97,7 @@
         }
         
         function displayMarker(place){
-                var marker = new kakao.maps.Marker({
+                marker = new kakao.maps.Marker({
                 map: map,
                 position: new kakao.maps.LatLng(place.y, place.x),
                 clickable : true 
