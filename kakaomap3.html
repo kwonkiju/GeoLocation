@@ -212,11 +212,14 @@
         </div>
     </div>
 
+    <button onclick="myPosition()">내위치</button>
+
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc687eb6e7836133082e4ee067adcd4f&libraries=services"></script>
     <script>
         // 마커를 담을 배열입니다
         var markers = [];
+        var lat,lng;
 
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
             mapOption = {
@@ -226,6 +229,16 @@
 
         // 지도를 생성합니다    
         var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        navigator.geolocation.getCurrentPosition(function(position) {
+        
+            lat = position.coords.latitude; // 위도
+            lng = position.coords.longitude; // 경도
+        });
+
+        function myPosition(){
+            map.setCenter(lat,lng);
+        }
 
         // 장소 검색 객체를 생성합니다
         var ps = new kakao.maps.services.Places();
