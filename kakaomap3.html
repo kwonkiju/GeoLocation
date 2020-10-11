@@ -29,6 +29,7 @@
         ps.keywordSearch('이태원 맛집',placeSearchCB);
         var infowindow = new kakao.maps.InfoWindow({zIndex:1});
         var locPosition;
+        var marker;
         // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
         if (navigator.geolocation) {
 
