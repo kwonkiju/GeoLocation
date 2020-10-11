@@ -30,6 +30,12 @@
         var infowindow = new kakao.maps.InfoWindow({zIndex:1});
         var locPosition;
         var marker;
+
+        kakao.maps.event.addListener(marker, 'click', function() {
+             // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+                    infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+                    infowindow.open(map, marker);
+                 });
         // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
         if (navigator.geolocation) {
 
@@ -52,16 +58,12 @@
 
                  kakao.maps.event.addListener(map, 'zoom_changed', function () {
 
-        var spanLevel = document.getElementById('maplevel');
+                 var spanLevel = document.getElementById('maplevel');
 
-        spanLevel.innerHTML = "현재 지도 레벨은 " + map.getLevel() + "입니다";
-            });
+                spanLevel.innerHTML = "현재 지도 레벨은 " + map.getLevel() + "입니다";
+                });
 
-            kakao.maps.event.addListener(marker, 'click', function() {
-             // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-                    infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-                    infowindow.open(map, marker);
-                 });
+                 
 
                 
 
