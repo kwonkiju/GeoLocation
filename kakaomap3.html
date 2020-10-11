@@ -31,11 +31,7 @@
         var locPosition;
         var marker;
 
-        kakao.maps.event.addListener(marker, 'click', function() {
-             // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-                    infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-                    infowindow.open(map, marker);
-                 });
+        
         // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
         if (navigator.geolocation) {
 
@@ -99,6 +95,12 @@
                 marker = new kakao.maps.Marker({
                 map: map,
                 position: new kakao.maps.LatLng(place.y, place.x) 
+                 });
+
+                 kakao.maps.event.addListener(marker, 'click', function() {
+             // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+                    infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+                    infowindow.open(map, marker);
                  });
 
                 
