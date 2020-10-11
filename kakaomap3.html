@@ -250,7 +250,7 @@
                 map: map, // 인포윈도우가 표시될 지도
                 position: new kakao.maps.LatLng(lat, lng),
                 content: '<div style="padding:5px;">현재 내위치 입니다</div>',
-                removable: iwRemoveable
+                removable: true
             });
 
             infowindow.open(map,marker);
