@@ -28,6 +28,8 @@
         var map;
         var lat, lgn;
         var markers =[];
+        var ps =new kakao.maps.services.Places();
+        ps.keywordSearch('이태원 맛집',placeSearchCB);
         // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
         if (navigator.geolocation) {
 
@@ -86,7 +88,7 @@
             var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
                 message = 'geolocation을 사용할수 없어요..'
 
-            displayMarker(locPosition, message);
+            
         }
 
         function displayKakaoMap(lat, lgn) {
@@ -117,15 +119,34 @@
                 setMarkers(map);
             }
 
-            
-        
+        function placeSearchCB(data,status,pagination){
+            if(status === kakao.maps.services.Status.OK){
+                var bounds =new kakao.maps.LatLngBounds();
 
-       
+                for (var i=0; i<data.length; i++) {
+                    displayMarker(data[i]);    
+                    bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+                }
 
+                map.setBounds(bounds);    
+            }
+        }
         
-        
-         
+        function displayMarker(place){
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: new kakao.maps.LatLng(place.y, place.x) 
+                 });
 
+    // 마커에 클릭이벤트를 등록합니다
+             kakao.maps.event.addListener(marker, 'click', function() {
+        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+            infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+            infowindow.open(map, marker);
+            });
+        }
+
+    
         function setCenter() {
             // 이동할 위도 경도 위치를 생성합니다 
             var moveLatLon = new kakao.maps.LatLng(33.452613, 126.570888);
