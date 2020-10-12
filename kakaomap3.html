@@ -212,7 +212,8 @@
         </div>
     </div>
 
-    <button onclick="myPosition()">내위치</button>
+    <button onclick="myPosition()">내위치</button><br/>
+    주소입력<input type="text" id="address"/>
 
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc687eb6e7836133082e4ee067adcd4f&libraries=services"></script>
@@ -459,6 +460,36 @@
             while (el.hasChildNodes()) {
                 el.removeChild(el.lastChild);
             }
+        }
+
+        function searchAddress(){
+
+            var address = document.getElementById("address");
+
+            var geocoder = new kakao.maps.services.Geocoder();
+
+            geocoder.addressSearch(address, function(result, status){
+
+                if (status === kakao.maps.services.Status.OK) {
+
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+           
+                var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+             });
+             infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+             map.setCenter(coords);
+           
+            }
+         }); 
         }
     </script>
 </body>
